@@ -1,5 +1,6 @@
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
+import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.v2019_2.vcs.GitVcsRoot
 
 /*
@@ -47,10 +48,12 @@ project {
         buildTypesOrder = listOf(buildType {
             id("hexlet_contest_build")
             name  = "Hexlet Contest Build"
-            
+
+            val vcsId = "hextlet_contest";
+
             vcs {
-                root(RelativeId("hextlet_contest"))
-                root(RelativeId("HttpsGithubComElysium11teamcityTestGit"))
+                root(RelativeId(vcsId))
+                root(DslContext.settingsRoot)
             }
 
             steps {
@@ -60,6 +63,12 @@ project {
                     echo "Hello from script"
                     ls -a 
                     """
+                }
+            }
+
+            triggers {
+                vcs {
+                    triggerRules = "+:root=${vcsId}:**"
                 }
             }
         })
