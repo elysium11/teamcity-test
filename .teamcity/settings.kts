@@ -30,7 +30,7 @@ project {
     description = "Contains all other projects"
 
     vcsRoot(GitVcsRoot {
-        id("hextlet-contest")
+        id("hextlet_contest")
         name = "Hexlet Contest"
         url = "git@github.com:elysium11/hexlet-contest.git"
         branch = "refs/heads/master"
@@ -42,14 +42,14 @@ project {
     })
 
     subProject {
-        id("hexlet-contest")
+        id("hexlet_contest")
         name ="Hexlet Contest"
         buildTypesOrder = listOf(buildType {
-            id("hexlet-contest-build")
+            id("hexlet_contest_build")
             name  = "Hexlet Contest Build"
             
             vcs {
-                root(RelativeId("hextlet-contest"))
+                root(RelativeId("hextlet_contest"))
             }
 
             steps {
