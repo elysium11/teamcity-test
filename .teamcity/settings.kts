@@ -50,6 +50,7 @@ project {
             
             vcs {
                 root(RelativeId("hextlet_contest"))
+                root(RelativeId("HttpsGithubComElysium11teamcityTestGit"))
             }
 
             steps {
@@ -57,6 +58,7 @@ project {
                     name = "test step"
                     scriptContent = """
                     echo "Hello from script"
+                    ls -a 
                     """
                 }
             }
