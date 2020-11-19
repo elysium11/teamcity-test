@@ -28,17 +28,37 @@ version = "2020.1"
 project {
     description = "Contains all other projects"
 
-    features {
-        buildReportTab {
-            id = "PROJECT_EXT_1"
-            title = "Code Coverage"
-            startPage = "coverage.zip!index.html"
+    vcsRoot(GitVcsRoot {
+        id("hextlet-contest")
+        name = "Hexlet Contest"
+        url = "git@github.com:elysium11/hexlet-contest.git"
+        branch = "refs/heads/master"
+        branchSpec = "+:*"
+        agentCleanPolicy = GitVcsRoot.AgentCleanPolicy.ALWAYS
+        authMethod = uploadKey {
+            uploadKey = "teamcity.rsa"
         }
-    }
+    })
 
-    cleanup {
-        baseRule {
-            preventDependencyCleanup = false
-        }
+    subProject {
+        id("hexlet-contest")
+        name("Hexlet Contest")
+        buildTypesOrder(listOf(buildType {
+            id("hexlet-contest-build")
+            name  = "Hexlet Contest Build"
+            
+            vcs {
+                root(RelativeId("hextlet-contest"))
+            }
+
+            steps {
+                script {
+                    name = "test step"
+                    scriptContent = """
+                    echo "Hello from script"
+                    """
+                }
+            }
+        }))
     }
 }
