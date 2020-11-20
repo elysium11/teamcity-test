@@ -27,8 +27,10 @@ changeBuildType(RelativeId("hexlet_contest_build")) {
             scriptContent = """
                 echo "##teamcity[setParameter name='env.RUN_NEXT' value='true']"
                 
+                ls "%teamcity.build.checkoutDir%/src/test/resources"
+                
                 USE_CUSTOM_BUILD_FILE=false
-                if [ -f "%teamcity.build.checkoutDir%/src/test/resources/test_payload_01.json"]; then
+                if [ -f "%teamcity.build.checkoutDir%/src/test/resources/test_payload_01.json" ]; then
                     USE_CUSTOM_BUILD_FILE=true
                 fi
                 
