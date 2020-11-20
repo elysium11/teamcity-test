@@ -45,9 +45,11 @@ changeBuildType(RelativeId("hexlet_contest_build")) {
                     equals("env.RUN_NEXT", "true")
                     equals("USE_CUSTOM_BUILD_FILE", "true")
                 }
+                param("template-name", "%USE_CUSTOM_BUILD_FILE%")
                 scriptContent = """
                     echo "Hello from script"
                     ls -a
+                    echo %template-name%
                 """.trimIndent()
             }
         }
