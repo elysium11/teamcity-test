@@ -1,6 +1,7 @@
 package patches.buildTypes
 
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.ScriptBuildStep
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2019_2.ui.*
 
@@ -20,10 +21,22 @@ changeBuildType(RelativeId("hexlet_contest_build")) {
         }
     }
     steps {
-        insert(0) {
+        update<ScriptBuildStep>(0) {
+            name = "set parameter"
+            clearConditions()
+            scriptContent = """echo "##teamcity[setParameter name='env.RUN_NEXT' value='true']""""
+        }
+        insert(1) {
             script {
-                name = "set parameter"
-                scriptContent = """echo "##teamcity[setParameter name='env.RUN_NEXT' value='true']""""
+                name = "test step"
+
+                conditions {
+                    equals("env.RUN_NEXT", "true")
+                }
+                scriptContent = """
+                    echo "Hello from script"
+                                        ls -a
+                """.trimIndent()
             }
         }
     }
