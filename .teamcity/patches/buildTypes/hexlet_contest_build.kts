@@ -32,7 +32,7 @@ changeBuildType(RelativeId("hexlet_contest_build")) {
                     USE_CUSTOM_BUILD_FILE=true
                 fi
                 
-                echo "##teamcity[setParameter name='USE_CUSTOM_BUILD_FILE' value='true']
+                echo "##teamcity[setParameter name='USE_CUSTOM_BUILD_FILE' value='${'$'}{USE_CUSTOM_BUILD_FILE}']"
             """.trimIndent()
         }
         insert(1) {
