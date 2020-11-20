@@ -35,7 +35,8 @@ changeBuildType(RelativeId("hexlet_contest_build")) {
                 }
                 scriptContent = """
                     echo "Hello from script"
-                                        ls -a
+                    ls -a
+                    echo "%teamcity.build.checkoutDir%"
                 """.trimIndent()
             }
         }
