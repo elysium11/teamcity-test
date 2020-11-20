@@ -32,11 +32,11 @@ changeBuildType(RelativeId("hexlet_contest_build")) {
 
                 conditions {
                     equals("env.RUN_NEXT", "true")
+                    equals("USE_CUSTOM_BUILD_FILE", "true")
                 }
                 scriptContent = """
                     echo "Hello from script"
                     ls -a
-                    echo "%teamcity.build.checkoutDir%"
                 """.trimIndent()
             }
         }
