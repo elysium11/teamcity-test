@@ -34,7 +34,7 @@ changeBuildType(RelativeId("hexlet_contest_build")) {
                     USE_CUSTOM_BUILD_FILE=true
                 fi
                 
-                echo "##teamcity[setParameter name='USE_CUSTOM_BUILD_FILE' value='${'$'}{USE_CUSTOM_BUILD_FILE}']"
+                echo "##teamcity[setParameter name='env.USE_CUSTOM_BUILD_FILE' value='${'$'}{USE_CUSTOM_BUILD_FILE}']"
             """.trimIndent()
         }
         insert(1) {
@@ -45,7 +45,7 @@ changeBuildType(RelativeId("hexlet_contest_build")) {
                     equals("env.RUN_NEXT", "true")
                     equals("USE_CUSTOM_BUILD_FILE", "true")
                 }
-                param("template-name", "%USE_CUSTOM_BUILD_FILE%")
+                param("template-name", "%env.USE_CUSTOM_BUILD_FILE%")
                 scriptContent = """
                     echo "Hello from script"
                     ls -a
