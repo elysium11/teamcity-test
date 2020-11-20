@@ -24,7 +24,7 @@ changeBuildType(RelativeId("hexlet_contest_build")) {
         update<ScriptBuildStep>(0) {
             name = "set parameter"
             clearConditions()
-            scriptContent = """echo "##teamcity[setParameter name='env.RUN_NEXT' value='true']""""
+            scriptContent = """echo "##teamcity[setParameter name='env.RUN_NEXT' value='false']""""
         }
         insert(1) {
             script {
