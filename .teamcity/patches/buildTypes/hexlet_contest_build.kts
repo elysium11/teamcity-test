@@ -24,7 +24,13 @@ changeBuildType(RelativeId("hexlet_contest_build")) {
         update<ScriptBuildStep>(0) {
             name = "set parameter"
             clearConditions()
-            scriptContent = """echo "##teamcity[setParameter name='env.RUN_NEXT' value='true']""""
+            scriptContent = """
+                echo "##teamcity[setParameter name='env.RUN_NEXT' value='true']"
+                USE_CUSTOM_BUILD_FILE=false
+                if [ -f "%teamcity.build.checkoutDir%/src/test/resources/test_payload_01.json"]
+                    echo "##teamcity[setParameter name='USE_CUSTOM_BUILD_FILE' value='true']"
+                fi
+            """.trimIndent()
         }
         insert(1) {
             script {
