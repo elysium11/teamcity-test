@@ -20,7 +20,7 @@ changeBuildType(RelativeId("hexlet_contest_build")) {
         }
     }
     steps {
-        insert(1) {
+        insert(0) {
             script {
                 name = "set parameter"
                 scriptContent = """echo "##teamcity[setParameter name='env.RUN_NEXT' value='true']""""
