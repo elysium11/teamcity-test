@@ -26,10 +26,13 @@ changeBuildType(RelativeId("hexlet_contest_build")) {
             clearConditions()
             scriptContent = """
                 echo "##teamcity[setParameter name='env.RUN_NEXT' value='true']"
+                
                 USE_CUSTOM_BUILD_FILE=false
-                if [ -f "%teamcity.build.checkoutDir%/src/test/resources/test_payload_01.json"]
-                    echo "##teamcity[setParameter name='USE_CUSTOM_BUILD_FILE' value='true']"
+                if [ -f "%teamcity.build.checkoutDir%/src/test/resources/test_payload_01.json"]; then
+                    USE_CUSTOM_BUILD_FILE=true
                 fi
+                
+                echo "##teamcity[setParameter name='USE_CUSTOM_BUILD_FILE' value='true']
             """.trimIndent()
         }
         insert(1) {
